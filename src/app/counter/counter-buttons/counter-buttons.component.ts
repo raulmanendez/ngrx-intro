@@ -9,36 +9,36 @@ import { decrement, increment, reset } from 'src/app/state/counter.actions';
 })
 export class CounterButtonsComponent implements OnInit {
 
-  // @Output() increment = new EventEmitter<void>();
-  // @Output() decrement = new EventEmitter<void>();
-  // @Output() reset = new EventEmitter<void>();
+  @Output() increment = new EventEmitter<void>();
+  @Output() decrement = new EventEmitter<void>();
+  @Output() reset = new EventEmitter<void>();
 
   constructor(private store: Store<{ counter : { counter :number } }>) { }
 
   ngOnInit(): void {
   }
 
-  // onIncrement() {
-  //   this.increment.emit()
-  // }
+  onIncrement() {
+    this.increment.emit()
+  }
 
-  // onDecrement() {
-  //   this.decrement.emit()
-  // }
+  onDecrement() {
+    this.decrement.emit()
+  }
 
-  // onReset() {
-  //   this.reset.emit()
-  // }
+  onReset() {
+    this.reset.emit()
+  }
 
-   onIncrement() {
+   onIncrementStore() {
       this.store.dispatch(increment())
     }
   
-    onDecrement() {
+    onDecrementStore() {
       this.store.dispatch(decrement())
     }
   
-    onReset() {
+    onResetStore() {
       this.store.dispatch(reset())
     }
 
