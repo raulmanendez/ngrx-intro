@@ -13,6 +13,11 @@ import { CounterButtonsComponent } from './counter/counter-buttons/counter-butto
 import { counterReducer } from './state/counter.reducer';
 import { CusomCounterInputComponent } from './cusom-counter-input/cusom-counter-input.component';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { HomeComponent } from './home/home.component';
+import { PostlistComponent } from './posts/postlist/postlist.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducer } from './store/app.state';
 
 @NgModule({
   declarations: [
@@ -20,11 +25,23 @@ import { FormsModule } from '@angular/forms';
     CounterComponent,
     CounterOutputComponent,
     CounterButtonsComponent,
-    CusomCounterInputComponent
+    CusomCounterInputComponent,
+    HeaderComponent,
+    HomeComponent,
+    PostlistComponent,
   ],
   imports: [
     FormsModule,
-    StoreModule.forRoot({counter : counterReducer}),
+    StoreModule.forRoot(appReducer),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: false,
+      features: {
+        pause: false,
+        lock: true,
+        persist: true
+      }
+    }),
     BrowserModule,
     AppRoutingModule,
   ],

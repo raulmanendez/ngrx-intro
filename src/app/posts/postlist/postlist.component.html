@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3>Posts</h3>
+
+        <table class="table table-bordered table-striped" *ngIf="posts$ | async as postsData">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let post of postsData">
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.description }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div> 
