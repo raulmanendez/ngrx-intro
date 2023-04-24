@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="mb-3">
+        <form [formGroup]="form" (ngSubmit)="onAddPost()">
+            <div class="mb-3">
+                <label>Title</label>
+                <input type="text" formControlName="title" class="form-control" />
+
+                <div *ngIf="form.get('title').touched && !form.get('title').valid">
+                    <div *ngIf="form.get('title').errors['required']">
+                        Please enter title.
+                    </div>
+                    <div *ngIf="form.get('title').errors['minlength']">
+                        Please enter title of minimum 6 length.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label>Description</label>
+                <textarea formControlName="description" class="form-control"></textarea>
+                <div>{{ getDescriptionErrors() }}</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+        </form>
+    </div>
+</div>
