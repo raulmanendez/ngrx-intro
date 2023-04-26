@@ -19,6 +19,7 @@ import { PostlistComponent } from './posts/postlist/postlist.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducer } from './store/app.state';
 import { AddPostComponent } from './posts/add-post/add-post.component';
+import { EditPostComponent } from './posts/edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AddPostComponent } from './posts/add-post/add-post.component';
     HomeComponent,
     PostlistComponent,
     AddPostComponent,
+    EditPostComponent,
   ],
   imports: [
     FormsModule,

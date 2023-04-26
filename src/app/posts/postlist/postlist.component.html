@@ -9,6 +9,7 @@
                     <th>Id</th>
                     <th>Title</th>
                     <th>Description</th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
@@ -17,6 +18,10 @@
                     <td>{{ post.id }}</td>
                     <td>{{ post.title }}</td>
                     <td>{{ post.description }}</td>
+                    <td>
+                        <a [routerLink]="['edit',post.id]" class="btn btn-primary">Update</a>&nbsp;
+                        <a (click)="onDeletePost(post.id)" class="btn btn-warning">Delete</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -24,8 +29,6 @@
     </div>
 
     <div class="col-md-6">
-        <h3>Add Post</h3>
-        <hr />
         <router-outlet></router-outlet>
     </div>
 </div>
