@@ -18,7 +18,7 @@ import { appReducer } from './store/app.state';
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(appReducer),
+    StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: false,

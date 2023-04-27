@@ -6,6 +6,9 @@ import { CounterButtonsComponent } from "../counter/counter-buttons/counter-butt
 import { CounterOutputComponent } from "../counter/counter-output/counter-output.component";
 import { CounterComponent } from "../counter/counter/counter.component";
 import { FormsModule } from "@angular/forms";
+import { StoreModule } from "@ngrx/store";
+import { counterReducer } from "../state/counter.reducer";
+import { COUNTER_STATE_NAME } from "../state/counter.selector";
 
 const routes: Routes = [
     { path: '', component: CounterComponent }
@@ -19,7 +22,7 @@ const routes: Routes = [
         CusomCounterInputComponent
     ],
     imports: [
-        CommonModule, FormsModule, RouterModule.forChild(routes)
+        CommonModule, FormsModule, StoreModule.forFeature(COUNTER_STATE_NAME,counterReducer), RouterModule.forChild(routes)
     ]
 })
 export class CounterModule {
