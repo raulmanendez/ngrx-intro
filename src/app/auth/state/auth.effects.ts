@@ -3,13 +3,18 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { loginStart, loginSuccess } from "./auth.action";
 import { EMPTY, catchError, exhaustMap, map, mergeMap } from "rxjs";
 import { AuthService } from "src/app/service/auth.service";
+import { SharedState } from "src/app/shared/state/shared.state";
+import { Store } from "@ngrx/store";
+import { setLoader } from "src/app/shared/state/shared.actions";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthEffects {
 
-    constructor(private actions$: Actions, private authService: AuthService) { }
+    constructor(private actions$: Actions,
+         private authService: AuthService,
+         private sharedState:Store<SharedState>) { }
 
         @Effect()
         login$ = this.actions$
@@ -20,6 +25,7 @@ export class AuthEffects {
                 .pipe(
                     map((data) => {  
                         const user=this.authService.toUser(data);
+                        this.sharedState.dispatch(setLoader({status:false}))
                         return loginSuccess({ user });
                     }),
                     catchError(() => EMPTY)
