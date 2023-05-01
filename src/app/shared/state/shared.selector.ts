@@ -3,8 +3,12 @@ import { SharedState } from "./shared.state";
 
 export const SHARED_STATE_NAME = 'shared'
 
-export const loadingState = createFeatureSelector<SharedState>(SHARED_STATE_NAME);
+export const sharedState = createFeatureSelector<SharedState>(SHARED_STATE_NAME);
 
-export const isLoading = createSelector(loadingState,(state) => {
+export const isLoading = createSelector(sharedState,(state) => {
     return state.isLoading;
+})
+
+export const errorMessage = createSelector(sharedState, (state) => {
+    return state.errorMessage;
 })

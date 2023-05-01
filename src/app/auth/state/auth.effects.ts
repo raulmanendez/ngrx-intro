@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { loginStart, loginSuccess } from "./auth.action";
-import { EMPTY, catchError, exhaustMap, map, mergeMap } from "rxjs";
+import { EMPTY, catchError, exhaustMap, map, mergeMap, of } from "rxjs";
 import { AuthService } from "src/app/service/auth.service";
 import { SharedState } from "src/app/shared/state/shared.state";
 import { Store } from "@ngrx/store";
-import { setLoader } from "src/app/shared/state/shared.actions";
+import { setError, setLoader } from "src/app/shared/state/shared.actions";
 
 @Injectable({
     providedIn: 'root'
@@ -28,7 +28,14 @@ export class AuthEffects {
                         this.sharedState.dispatch(setLoader({status:false}))
                         return loginSuccess({ user });
                     }),
-                    catchError(() => EMPTY)
+                    catchError((error) => {
+                        console.log(error.error.error.message)
+                        const message=this.authService.toMessage(
+                            error.error.error.message
+                        );
+                        this.sharedState.dispatch(setLoader({status:false}))
+                        return of(setError({ message:message }))
+                    })
               ))
             )
 }

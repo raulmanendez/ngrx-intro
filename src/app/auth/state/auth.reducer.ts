@@ -9,7 +9,7 @@ const _authReducer = createReducer(initialState,
             user: action.user
         }
     })
-
+    
     );
 
 export function authReducer(state,action) {

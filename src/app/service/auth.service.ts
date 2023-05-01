@@ -23,4 +23,15 @@ export class AuthService {
       toUser(user :AuthResponse) {
         return new User(user.localId,user.email,user.idToken, new Date(new Date().getTime() +  (+user.expiresIn * 1000)))
       }
+
+      toMessage(code:string) {
+        switch(code) {
+          case 'EMAIL_NOT_FOUND':
+            return 'Email not found!'
+          case 'INVALID_PASSWORD':
+            return 'Password Invalid!'
+          default:
+            return 'Unknown Error!'
+        }
+      }
 }

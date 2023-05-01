@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { SharedState } from './shared/state/shared.state';
-import { isLoading } from './shared/state/shared.selector';
+import { errorMessage, isLoading } from './shared/state/shared.selector';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +13,13 @@ export class AppComponent implements OnInit {
   
   title = 'ngrx';
   isLoading:Observable<boolean>;
+  error:Observable<string>;
 
   constructor(private store:Store<SharedState>) { }
 
   ngOnInit(): void {
     this.isLoading = this.store.select(isLoading)
+    this.error = this.store.select(errorMessage)
   }
 
 
