@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  FIRBASE_API_KEY: 'AIzaSyDew2T-s3SS_1aKv6y1-N66lxxu9reTXmA',
+  FIRBASE_API_KEY: 'AIzaSyDew2T-',
 };
 
 /*
