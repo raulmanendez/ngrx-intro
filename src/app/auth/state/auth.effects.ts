@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, createEffect, ofType } from "@ngrx/effects";
-import { loginStart, loginSuccess } from "./auth.action";
+import { loginStart, loginSuccess, signupStart, signupSuccess } from "./auth.action";
 import { EMPTY, catchError, exhaustMap, map, mergeMap, of, tap } from "rxjs";
 import { AuthService } from "src/app/service/auth.service";
 import { SharedState } from "src/app/shared/state/shared.state";
@@ -43,10 +43,35 @@ export class AuthEffects {
                 )
         })
 
+        signup$ = createEffect(
+            () => {
+                return this.actions$
+                    .pipe(
+                        ofType(signupStart),
+                        mergeMap((action) =>
+                            this.authService.signup(action.email, action.password)
+                                .pipe(
+                                    map((data) => {
+                                        const user = this.authService.toUser(data);
+                                        this.sharedState.dispatch(setLoader({ status: false }))
+                                        return signupSuccess({ user });
+                                    }),
+                                    catchError((error) => {
+                                        console.log(error.error.error.message)
+                                        const message = this.authService.toMessage(
+                                            error.error.error.message
+                                        );
+                                        this.sharedState.dispatch(setLoader({ status: false }))
+                                        return of(setError({ message: message }))
+                                    })
+                                ))
+                    )
+            })
+
     loginRedirect$ = createEffect(
         () => {
             return this.actions$.pipe(
-                ofType(loginSuccess),
+                ofType(...[loginSuccess,signupSuccess]),
                 tap((action) => {
                     this.router.navigate(['/']);
                 })

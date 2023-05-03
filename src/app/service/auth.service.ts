@@ -7,31 +7,40 @@ import { Observable } from "rxjs";
 import { User } from "../model/user.model";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthService {
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    login(email: string, password: string) : Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIRBASE_API_KEY}`,
-          { email, password, returnSecureToken: true }
-        );
-      }
+  login(email: string, password: string): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIRBASE_API_KEY}`,
+      { email, password, returnSecureToken: true }
+    );
+  }
 
-      toUser(user :AuthResponse) {
-        return new User(user.localId,user.email,user.idToken, new Date(new Date().getTime() +  (+user.expiresIn * 1000)))
-      }
+  signup(email: string, password: string): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.FIRBASE_API_KEY}`,
+      { email, password, returnSecureToken: true }
+    );
+  }
 
-      toMessage(code:string) {
-        switch(code) {
-          case 'EMAIL_NOT_FOUND':
-            return 'Email not found!'
-          case 'INVALID_PASSWORD':
-            return 'Password Invalid!'
-          default:
-            return 'Unknown Error!'
-        }
-      }
+  toUser(user: AuthResponse) {
+    return new User(user.localId, user.email, user.idToken, new Date(new Date().getTime() + (+user.expiresIn * 1000)))
+  }
+
+  toMessage(code: string) {
+    switch (code) {
+      case 'EMAIL_NOT_FOUND':
+        return 'Email not found!'
+      case 'INVALID_PASSWORD':
+        return 'Password Invalid!'
+      case 'EMAIL_EXISTS':
+        return 'Email already exists!'
+      default:
+        return 'Unknown Error!'
+    }
+  }
 }
