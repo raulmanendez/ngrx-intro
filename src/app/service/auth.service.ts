@@ -5,13 +5,18 @@ import { environment } from "src/environments/environment";
 import { AuthResponse } from "../model/auth.response";
 import { Observable } from "rxjs";
 import { User } from "../model/user.model";
+import { Store } from "@ngrx/store";
+import { AppState } from "../store/app.state";
+import { autoLogout } from "../auth/state/auth.action";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  timeoutInterval: any;
+  constructor(private http: HttpClient,
+    private store: Store<AppState>) { }
 
   login(email: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(
@@ -29,6 +34,38 @@ export class AuthService {
 
   toUser(user: AuthResponse) {
     return new User(user.localId, user.email, user.idToken, new Date(new Date().getTime() + (+user.expiresIn * 1000)))
+  }
+
+  setUserInLocalStorage(user:User){
+    this.runTimeoutInterval(user);
+    localStorage.setItem("auth_user",JSON.stringify(user)); 
+  }
+
+  getUserFromLocalStorage(){
+    let userLocal = JSON.parse(localStorage.getItem("auth_user"));
+    let user = new User(userLocal.id,userLocal.token,userLocal.email, userLocal.expiry)
+
+    this.runTimeoutInterval(user);
+    return user;
+  }
+
+  runTimeoutInterval(user: User) {
+    const todaysDate = new Date().getTime();
+    const expirationDate = new Date(user.expiryDate).getTime();
+    const timeInterval = expirationDate - todaysDate;
+
+    this.timeoutInterval = setTimeout(() => {
+      this.store.dispatch(autoLogout());
+      //logout functionality or get the refresh token
+    }, timeInterval);
+  }
+
+  logout() {
+    localStorage.removeItem('auth_user');
+    if (this.timeoutInterval) {
+      clearTimeout(this.timeoutInterval);
+      this.timeoutInterval = null;
+    }
   }
 
   toMessage(code: string) {

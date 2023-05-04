@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { SharedState } from './shared/state/shared.state';
 import { errorMessage, isLoading } from './shared/state/shared.selector';
+import { autoLogin } from './auth/state/auth.action';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = this.store.select(isLoading)
     this.error = this.store.select(errorMessage)
+
+    console.log('dispatching auto login from app cmponent....')
+    this.store.dispatch(autoLogin());
   }
 
 

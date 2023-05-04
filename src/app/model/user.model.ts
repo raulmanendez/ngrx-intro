@@ -5,4 +5,6 @@ export class User {
         private token: string,
         private expiry: Date
     ) { }
+
+    get expiryDate() { return this.expiry}
 }

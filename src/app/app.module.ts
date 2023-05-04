@@ -11,6 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { appReducer } from './store/app.state';
+import { AuthEffects } from './auth/state/auth.effects';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { appReducer } from './store/app.state';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
