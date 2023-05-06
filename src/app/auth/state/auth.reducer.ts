@@ -4,7 +4,6 @@ import { autoLogout, loginSuccess, signupSuccess } from "./auth.action";
 
 const _authReducer = createReducer(initialState,
     on(loginSuccess, (state,action) => {
-        console.log("login success called.....")
         return {
             ...state,
             user: action.user

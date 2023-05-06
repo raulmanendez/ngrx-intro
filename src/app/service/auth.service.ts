@@ -36,17 +36,20 @@ export class AuthService {
     return new User(user.localId, user.email, user.idToken, new Date(new Date().getTime() + (+user.expiresIn * 1000)))
   }
 
-  setUserInLocalStorage(user:User){
+  setUserInLocalStorage(user: User) {
     this.runTimeoutInterval(user);
-    localStorage.setItem("auth_user",JSON.stringify(user)); 
+    localStorage.setItem("auth_user", JSON.stringify(user));
   }
 
-  getUserFromLocalStorage(){
+  getUserFromLocalStorage() {
     let userLocal = JSON.parse(localStorage.getItem("auth_user"));
-    let user = new User(userLocal.id,userLocal.token,userLocal.email, userLocal.expiry)
+    if (userLocal) {
+      let user = new User(userLocal.id, userLocal.email, userLocal.token, userLocal.expiry)
 
-    this.runTimeoutInterval(user);
-    return user;
+      this.runTimeoutInterval(user);
+      return user;
+    }
+    return null
   }
 
   runTimeoutInterval(user: User) {

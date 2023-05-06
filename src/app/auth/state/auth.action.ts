@@ -23,7 +23,7 @@ export const signupStart=createAction(SIGNUP_START,
     props<{ email:string,password:string }>()
 );
 export const signupSuccess=createAction(SIGNUP_SUCCESS,
-    props< { user : User } >()
+    props< { user : User, redirect: boolean } >()
 );
 
 export const autoLogin=createAction(AUTO_LOGIN);

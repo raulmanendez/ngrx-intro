@@ -5,6 +5,7 @@ import { Post } from 'src/app/model/post.model';
 import { AppState } from 'src/app/store/app.state';
 import { getPosts } from '../state/posts.selector';
 import { deletePost, loadPosts } from '../state/posts.actions';
+import { setLoader } from 'src/app/shared/state/shared.actions';
 
 @Component({
   selector: 'app-postlist',

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store'
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { appReducer } from './store/app.state';
 import { AuthEffects } from './auth/state/auth.effects';
+import { MyInterceptor } from './service/interceptor';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import { AuthEffects } from './auth/state/auth.effects';
     BrowserModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -59,7 +59,7 @@ export class AuthEffects {
                                         this.authService.setUserInLocalStorage(user);
 
                                         this.sharedState.dispatch(setLoader({ status: false }))
-                                        return signupSuccess({ user });
+                                        return signupSuccess({ user, redirect:false });
                                     }),
                                     catchError((error) => {
                                         console.log(error.error.error.message)
@@ -77,8 +77,9 @@ export class AuthEffects {
         () => {
             return this.actions$.pipe(
                 ofType(...[loginSuccess,signupSuccess]),
-                tap(() => {
-                    this.router.navigate(['/']);
+                tap((data) => {
+                    if(data.redirect)
+                        this.router.navigate(['/']);
                 })
             );
         },
