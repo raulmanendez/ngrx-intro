@@ -32,7 +32,7 @@ export class AuthEffects {
                                     this.authService.setUserInLocalStorage(user);
 
                                     this.sharedState.dispatch(setLoader({ status: false }))
-                                    return loginSuccess({ user, redirect:false });
+                                    return loginSuccess({ user, redirect:true });
                                 }),
                                 catchError((error) => {
                                     console.log(error.error.error.message)
