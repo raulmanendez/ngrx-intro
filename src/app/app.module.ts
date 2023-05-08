@@ -13,6 +13,8 @@ import { LoaderComponent } from './shared/loader/loader.component';
 import { appReducer } from './store/app.state';
 import { AuthEffects } from './auth/state/auth.effects';
 import { MyInterceptor } from './service/interceptor';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { MyRouterSerializer } from './store/router.serializer';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,9 @@ import { MyInterceptor } from './service/interceptor';
     ReactiveFormsModule,
     EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(appReducer),
+    StoreRouterConnectingModule.forRoot({
+      serializer:MyRouterSerializer
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: false,
