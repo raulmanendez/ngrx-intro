@@ -1,9 +1,8 @@
+import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity"
 import { Post } from "src/app/model/post.model"
 
-export const initialState : PostState = {
-    posts :[]
-}
+export interface PostState extends EntityState<Post> { }
 
-export interface PostState {
-    posts : Post[]
-}
+export const postAdapter = createEntityAdapter<Post>()
+
+export const initialState  =  postAdapter.getInitialState();

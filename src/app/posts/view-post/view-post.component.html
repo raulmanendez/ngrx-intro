@@ -1,0 +1,24 @@
+<h3>Post Details</h3>
+
+<div *ngIf="post | async as postData">
+
+    <div class="mb3">
+        <label>ID:</label>
+        {{ postData.id}}
+    </div>
+
+    <div class="mb3">
+        <label>Title:</label>
+        {{ postData.title}}
+    </div>
+
+    <div class="mb3">
+        <label>Description:</label>
+        {{ postData.description}}
+    </div>
+
+    <div class="mb3">
+        <a [routerLink]="['/posts']">Back</a>
+    </div>
+
+</div>

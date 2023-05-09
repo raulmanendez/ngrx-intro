@@ -15,13 +15,15 @@ import { AuthEffects } from './auth/state/auth.effects';
 import { MyInterceptor } from './service/interceptor';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { MyRouterSerializer } from './store/router.serializer';
+import { ViewPostComponent } from './posts/view-post/view-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    LoaderComponent
+    LoaderComponent,
+    ViewPostComponent
   ],
   imports: [
     FormsModule,

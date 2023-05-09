@@ -19,6 +19,7 @@
                     <td>{{ post.title }}</td>
                     <td>{{ post.description }}</td>
                     <td>
+                        <a [routerLink]="['details',post.id]" class="btn btn-info">Detail</a>&nbsp;
                         <a [routerLink]="['edit',post.id]" class="btn btn-primary">Update</a>&nbsp;
                         <a (click)="onDeletePost(post.id)" class="btn btn-warning">Delete</a>
                     </td>
