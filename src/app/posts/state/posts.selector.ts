@@ -14,6 +14,9 @@ const getPostsState = createFeatureSelector<PostState>(POST_STATE_NAME);
 export const getPosts = createSelector(getPostsState,postSelector.selectAll)
 export const getPostEntites = createSelector(getPostsState,postSelector.selectEntities)
 
+
+export const getPostCount = createSelector(getPostsState,(state) => state.count)
+
 export const getPostById = createSelector(
     getPostEntites,
     getCurrentRoute,

@@ -16,6 +16,8 @@ import { MyInterceptor } from './service/interceptor';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { MyRouterSerializer } from './store/router.serializer';
 import { ViewPostComponent } from './posts/view-post/view-post.component';
+import { EntityDataModule } from '@ngrx/data';
+import { entityConfig } from './entity-metadata';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,7 @@ import { ViewPostComponent } from './posts/view-post/view-post.component';
     HeaderComponent,
     HomeComponent,
     LoaderComponent,
-    ViewPostComponent
+    ViewPostComponent,
   ],
   imports: [
     FormsModule,
@@ -45,6 +47,7 @@ import { ViewPostComponent } from './posts/view-post/view-post.component';
     }),
     BrowserModule,
     AppRoutingModule,
+    EntityDataModule.forRoot(entityConfig),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true }

@@ -11,6 +11,10 @@
           <a class="nav-link" [routerLink]="['/posts']">List Posts</a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/students']">List Students</a>
+        </li>
+
         <li class="nav-item" *ngIf="!(loggedIn | async)">
           <a class="nav-link" [routerLink]="['/auth']">Login</a>
         </li>

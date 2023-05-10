@@ -8,7 +8,10 @@ export function postsReducer(state, action) {
 
 const _postsReducer = createReducer(initialState,
     on(addPostSuccess, (state, action) => {
-        return postAdapter.addOne(action.post,state);
+        return postAdapter.addOne(action.post,{
+            ...state,
+            count:state.count+1
+        });
     }),
     on(updatePostSuccess, (state, action) => {
         return postAdapter.updateOne(action.post,state);

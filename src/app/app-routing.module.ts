@@ -20,6 +20,11 @@ const routes: Routes = [
     path:'posts/details/:id',component:ViewPostComponent
   },
   {
+    path: 'students', loadChildren: () => import('./modules/student.module')
+      .then(m => m.StudentModule),
+      canActivate: [MyAuthGuard]
+  },
+  {
     path:'auth', loadChildren : () => import('./auth/auth.module')
       .then(m => m.AUthModule)
   }

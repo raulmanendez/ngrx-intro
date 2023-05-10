@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-8">
-        <h3>Posts</h3>
+        <h3>Posts {{ count$ | async}}</h3>
         <a class="btn btn-primary mb-2" [routerLink]="['/posts/add']">Add Post</a>
 
         <table class="table table-bordered table-striped" *ngIf="posts$ | async as postsData">

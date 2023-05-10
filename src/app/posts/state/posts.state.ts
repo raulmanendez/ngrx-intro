@@ -1,8 +1,19 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity"
 import { Post } from "src/app/model/post.model"
 
-export interface PostState extends EntityState<Post> { }
 
-export const postAdapter = createEntityAdapter<Post>()
+export function comparator(a:Post,b:Post) {
+    return a.title.localeCompare(b.title);
+}
 
-export const initialState  =  postAdapter.getInitialState();
+export interface PostState extends EntityState<Post> { 
+    count : number
+}
+
+export const postAdapter = createEntityAdapter<Post>({
+    sortComparer:comparator
+})
+
+export const initialState  =  postAdapter.getInitialState({
+    count:0
+});
