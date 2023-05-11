@@ -1,1 +1,20 @@
-<p>add-student works!</p>
+<h3>Add Student</h3>
+<hr />
+<div class="row">
+    <div class="mb-3">
+        <form [formGroup]="form" (ngSubmit)="onAddStudent()">
+            <div class="mb-3">
+                <label>Name</label>
+                <input type="text" formControlName="name" class="form-control" />
+
+                <div *ngIf="form.get('name').touched && !form.get('name').valid">
+                    <div *ngIf="form.get('name').errors['required']">
+                        Please enter name.
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Add Student</button>
+        </form>
+    </div>
+</div>

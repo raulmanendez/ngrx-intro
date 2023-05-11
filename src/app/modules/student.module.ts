@@ -7,8 +7,9 @@ import { AddStudentComponent } from "../student/add-student/add-student.componen
 import { EditStudentComponent } from "../student/edit-student/edit-student.component";
 import { ViewStudentComponent } from "../student/view-student/view-student.component";
 import { StudentDataService } from "../service/student.data.service";
-import { EntityDataService } from "@ngrx/data";
+import { EntityDataModule, EntityDataService, EntityDefinitionService } from "@ngrx/data";
 import { StudentResolver } from "../service/student.resolver";
+import { entityConfig } from '../entity-metadata';
 
 
 const routes: Routes = [
@@ -36,8 +37,11 @@ const routes: Routes = [
     providers:[StudentDataService,StudentResolver]
 })
 export class StudentModule {
- constructor(entityDataService:EntityDataService,
+ constructor(
+    eds: EntityDefinitionService,
+    entityDataService:EntityDataService,
     stduentDataService:StudentDataService) {
+        eds.registerMetadataMap(entityConfig.entityMetadata);
         entityDataService.registerService("Student",stduentDataService);
     }
 }

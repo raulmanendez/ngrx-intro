@@ -18,9 +18,9 @@ export class ListStudentComponent implements OnInit {
     this.students$ = this.studentService.entities$
   }
 
-  onDeletePost(id:number) {
+  onDeletePost(id:string) {
     if(confirm ('Are you sure ?')) {
-      
+      this.studentService.delete(id);
     }
   }
 

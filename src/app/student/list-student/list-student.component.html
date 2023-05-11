@@ -17,8 +17,8 @@
                     <td>{{ student.id }}</td>
                     <td>{{ student.name }}</td>
                     <td>
-                        <a [routerLink]="['details',student.id]" class="btn btn-info">Detail</a>&nbsp;
-                        <a [routerLink]="['edit',student.id]" class="btn btn-primary">Update</a>&nbsp;
+                        <a [routerLink]="['/students','view',student.id]" class="btn btn-info">Detail</a>&nbsp;
+                        <a [routerLink]="['/students','edit',student.id]" class="btn btn-primary">Update</a>&nbsp;
                         <a (click)="onDeletePost(student.id)" class="btn btn-warning">Delete</a>
                     </td>
                 </tr>
